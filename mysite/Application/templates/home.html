@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Paradise</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 100px;
+            background-image: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?cs=srgb&dl=pexels-chan-walrus-941861.jpg&fm=jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ddddd9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffcc00; 
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        #hotel-description {
+            margin-bottom: 20px;
+        }
+        #btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .button {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Welcome to Hotel Paradise</h1>
+        <div id="hotel-description">
+            <p>Experience luxury and comfort at Hotel Paradise. Our hotel is located in the heart of the city, offering stunning views and convenient access to popular attractions. Whether you're here for business or leisure, we strive to make your stay memorable.</p>
+            <p>Indulge in our world-class amenities, savor delicious cuisine at our restaurants, and unwind in our spacious and elegantly designed rooms. At Hotel Paradise, we are committed to providing exceptional service to ensure your satisfaction.</p>
+        </div>
+        <div id="btn-container">
+            <button class="button"><a href="manager" class="text-white">Manager</a></button>
+            <button class="button"><a href="customer" class="text-white">Customer</a></button>
+        </div>
+    </div>
+</body>
+</html>

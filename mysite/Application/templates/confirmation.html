@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Method Selection</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?cs=srgb&dl=pexels-chan-walrus-941861.jpg&fm=jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-box">
+    <h1>Payment Method Selection</h1>
+
+    <form action="process_payment" method="post">
+        {% csrf_token %}
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" name="paymentMethod" value="Card">
+            Credit/Debit Card
+        </label>
+
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" name="paymentMethod" value="Cash">
+            Cash
+        </label>
+
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" name="paymentMethod" value="UPI">
+            UPI
+        </label>
+
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js (required for Bootstrap JavaScript plugins) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

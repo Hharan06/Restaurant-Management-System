@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?cs=srgb&dl=pexels-chan-walrus-941861.jpg&fm=jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .box-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            color: #0f0d02;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #314632;
+            color: white;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #cart {
+            width: 100%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .cart-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box-container">
+        <h2>Restaurant Menu</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in dish %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>
+                            <button onclick="addToCart('{{ item.name }}', '{{ item.category }}', {{ item.price }})">Add to Cart</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Cart</h2>
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in cart %}
+                    <tr>
+                        <td>{{ i.cust_id }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.category }}</td>
+                        <td>{{ i.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            <p>Sum: <span id="sum">0</span></p>
+            <button onclick="calculateSum()">Calculate Sum</button>
+        </div>
+
+        <button><a href="pay">Pay</a></button>
+    </div>
+
+    <script>
+        function addToCart(itemName, itemCategory, itemPrice) {
+            // Your existing addToCart script
+            var data = {
+                item_name: itemName,
+                item_category: itemCategory,
+                item_price: itemPrice
+            };
+
+            fetch('/add_to_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from server:', data);
+                alert('Item added to cart successfully!');
+                // You can add additional UI updates here if needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors and update the UI accordingly
+            });
+        }
+
+        function calculateSum() {
+            // Get the table reference
+            var table = document.getElementById('myTable');
+
+            // Get the tbody element
+            var tbody = table.getElementsByTagName('tbody')[0];
+
+            var rows = tbody.getElementsByTagName('tr');
+
+            var sum = 0;
+
+            for (var i = 0; i < rows.length; i++) {
+                var cell = rows[i].getElementsByTagName('td')[3];
+                sum += parseFloat(cell.textContent);
+            }
+
+            document.getElementById('sum').textContent = sum;
+        }
+    </script>
+
+</body>
+</html>
